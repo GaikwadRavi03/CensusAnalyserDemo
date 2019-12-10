@@ -1,9 +1,10 @@
 package censusanalyser;
 
 
+import CSVBuilder.CSVBuilderFactory;
+import CSVBuilder.ICSVBuilder;
+import CSVBuilder.OpenCSVException;
 import com.google.gson.Gson;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
 
 import java.io.IOException;
 import java.io.Reader;

@@ -1,5 +1,6 @@
-package censusanalyser;
+package CSVBuilder;
 
+import censusanalyser.CensusAnalyserException;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -8,16 +9,16 @@ import java.util.Iterator;
 import java.util.List;
 
 public class OpenCsvBuilder<E> implements ICSVBuilder {
-    public Iterator<E> getCSVFileIterator(Reader reader, Class csvClass) throws OpenCSVException, CensusAnalyserException {
+    public Iterator<E> getCSVFileIterator(Reader reader, Class csvClass) throws OpenCSVException{
         return this.getCSVBean(reader, csvClass).iterator();
     }
 
     @Override
-    public List<E> getCSVFileList(Reader reader, Class csvClass) throws CensusAnalyserException, OpenCSVException {
+    public List<E> getCSVFileList(Reader reader, Class csvClass) throws OpenCSVException {
         return this.getCSVBean(reader, csvClass).parse();
     }
 
-    private CsvToBean<E> getCSVBean(Reader reader, Class csvClass) throws CensusAnalyserException, OpenCSVException {
+    private CsvToBean<E> getCSVBean(Reader reader, Class csvClass) throws OpenCSVException {
         try {
             CsvToBeanBuilder<E> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
             csvToBeanBuilder.withType(csvClass);

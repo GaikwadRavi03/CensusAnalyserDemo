@@ -35,8 +35,8 @@ public class CensusAnalyser<E> {
         } catch (RuntimeException e) {
             if (e.getMessage().compareTo("Error capturing CSV header!") == 0) {
                 throw new CensusAnalyserException("Error capturing CSV header!", CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER);
-            }else
-            return 1;
+            } else
+                return 1;
         }
     }
 
@@ -44,6 +44,7 @@ public class CensusAnalyser<E> {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             censusList = csvBuilder.getCSVFileList(reader, IndiaStateCodeCsv.class);
+            System.out.println("------->>>" + censusList.size());
             return censusList.size();
         } catch (IOException | CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(),
@@ -73,9 +74,10 @@ public class CensusAnalyser<E> {
             for (int j = 0; j < censusList.size() - i - 1; j++) {
                 IndiaCensusDAO census1 = censusList.get(j);
                 IndiaCensusDAO census2 = censusList.get(j + 1);
-                if (censusComparator.compare(census1, census2) > 0)
+                if (censusComparator.compare(census1, census2) > 0) {
                     censusList.set(j, census2);
-                censusList.set(j + 1, census1);
+                    censusList.set(j + 1, census1);
+                }
             }
         }
     }

@@ -32,6 +32,11 @@ public class CensusAnalyser<E> {
         } catch (IOException | CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+        } catch (RuntimeException e) {
+            if (e.getMessage().compareTo("Error capturing CSV header!") == 0) {
+                throw new CensusAnalyserException("Error capturing CSV header!", CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER);
+            }else
+            return 1;
         }
     }
 

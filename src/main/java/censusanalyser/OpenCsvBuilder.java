@@ -21,6 +21,7 @@ public class OpenCsvBuilder<E> implements ICSVBuilder {
         try {
             CsvToBeanBuilder<E> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
             csvToBeanBuilder.withType(csvClass);
+            csvToBeanBuilder.withSeparator(';');
             csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
             return csvToBeanBuilder.build();
         } catch (IllegalStateException e) {

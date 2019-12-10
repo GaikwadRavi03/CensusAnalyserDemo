@@ -1,9 +1,6 @@
 package censusanalyser;
 
 
-import CSVBuilder.CSVBuilderFactory;
-import CSVBuilder.ICSVBuilder;
-import CSVBuilder.OpenCSVException;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -32,7 +29,7 @@ public class CensusAnalyser<E> {
                 this.censusList.add(new IndiaCensusDAO(csvFileIterator.next()));
             }
             return censusList.size();
-        } catch (IOException | OpenCSVException e) {
+        } catch (IOException | CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
@@ -43,7 +40,7 @@ public class CensusAnalyser<E> {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             censusList = csvBuilder.getCSVFileList(reader, IndiaStateCodeCsv.class);
             return censusList.size();
-        } catch (IOException | OpenCSVException e) {
+        } catch (IOException | CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }

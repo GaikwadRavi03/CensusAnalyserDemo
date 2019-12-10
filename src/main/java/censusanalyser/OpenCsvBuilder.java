@@ -9,7 +9,7 @@ import java.util.List;
 
 public class OpenCsvBuilder<E> implements ICSVBuilder {
     public Iterator<E> getCSVFileIterator(Reader reader, Class csvClass) throws OpenCSVException, CensusAnalyserException {
-        return (Iterator<E>) this.getCSVBean(reader, csvClass);
+        return this.getCSVBean(reader, csvClass).iterator();
     }
 
     @Override

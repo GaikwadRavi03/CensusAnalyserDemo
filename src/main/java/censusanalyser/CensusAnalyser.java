@@ -27,18 +27,16 @@ public class CensusAnalyser<E> {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<IndiaCensusCSV> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IndiaCensusCSV.class);
-            while (csvFileIterator.hasNext()) {
-                this.censusList.add(new IndiaCensusDAO(csvFileIterator.next()));
-            }
+            Iterable<IndiaCensusCSV> csvIterable = () -> csvFileIterator;
+            StreamSupport.stream(csvIterable.spliterator(), false).
+                    forEach(censusCSV -> censusList.add(new IndiaCensusDAO(censusCSV)));
             return censusList.size();
         } catch (IOException | CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         } catch (RuntimeException e) {
-            if (e.getMessage().compareTo("Error capturing CSV header!") == 0) {
-                throw new CensusAnalyserException("Error capturing CSV header!", CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER);
-            } else
-                return 1;
+            throw new CensusAnalyserException(e.getMessage(),
+                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
     }
 

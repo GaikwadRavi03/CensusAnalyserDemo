@@ -1,7 +1,9 @@
 package censusanalyser;
 
-
 import com.google.gson.Gson;
+import opencsvbuilder.CSVBuilderException;
+import opencsvbuilder.CSVBuilderFactory;
+import opencsvbuilder.ICSVBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -44,7 +46,6 @@ public class CensusAnalyser<E> {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             censusList = csvBuilder.getCSVFileList(reader, IndiaStateCodeCsv.class);
-            System.out.println("------->>>" + censusList.size());
             return censusList.size();
         } catch (IOException | CSVBuilderException e) {
             throw new CensusAnalyserException(e.getMessage(),

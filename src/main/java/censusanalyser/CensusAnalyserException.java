@@ -3,7 +3,6 @@ package censusanalyser;
 public class CensusAnalyserException extends Exception {
 
     public CensusAnalyserException(String message, String name) {
-
     }
 
     enum ExceptionType {

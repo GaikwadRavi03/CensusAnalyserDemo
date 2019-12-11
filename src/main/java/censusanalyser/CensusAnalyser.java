@@ -57,12 +57,6 @@ public class CensusAnalyser<E> {
         }
     }
 
-    private <E> int getCount(Iterator<E> censusCSVIterator) {
-        Iterable<E> csvIterator = () -> censusCSVIterator;
-        int namOfEateries = (int) StreamSupport.stream(csvIterator.spliterator(), false).count();
-        return namOfEateries;
-    }
-
     public String getStateWiseSortedCensusData() throws CensusAnalyserException {
         if (censusStateMap == null || censusStateMap.size() == 0) {
             throw new CensusAnalyserException("No Census Data",

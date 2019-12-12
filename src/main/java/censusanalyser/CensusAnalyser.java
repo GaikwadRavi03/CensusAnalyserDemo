@@ -1,19 +1,13 @@
 package censusanalyser;
 
 import com.google.gson.Gson;
-import opencsvbuilder.CSVBuilderException;
-import opencsvbuilder.CSVBuilderFactory;
-import opencsvbuilder.ICSVBuilder;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 public class CensusAnalyser<E> {
+
+    public enum Country {INDIA, US}
 
     Map<String, CensusDAO> censusStateMap = null;
     Map<SortingField, Comparator<CensusDAO>> sortingMap = null;
@@ -27,13 +21,8 @@ public class CensusAnalyser<E> {
         this.sortingMap.put(SortingField.densityPerSqKm, Comparator.comparing(census -> census.populationDensity));
     }
 
-    public int loadIndiaCensusData(String... csvFilePath) throws CensusAnalyserException {
-        censusStateMap = new CensusLoader().loadCensusData(IndiaCensusCSV.class, csvFilePath);
-        return censusStateMap.size();
-    }
-
-    public int loadUSCensusData(String... csvFilePath) throws CensusAnalyserException {
-        censusStateMap = new CensusLoader().loadCensusData(USCensusCSV.class, csvFilePath);
+    public int loadCensusData(Country country, String... csvFilePath) throws CensusAnalyserException {
+        censusStateMap = new CensusLoader().loadCensusData(country, csvFilePath);
         return censusStateMap.size();
     }
 

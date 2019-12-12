@@ -216,7 +216,7 @@ public class CensusAnalyserTest {
     }
 
     @Test
-    public void givenCensusData_ShouldReturnCorrectRecords() {
+    public void givenUSCensusData_ShouldReturnCorrectRecords() {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             int data = censusAnalyser.loadUSCensusData(US_CENSUS_DATA_CSV_FILE_PATH);

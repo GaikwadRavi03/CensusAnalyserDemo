@@ -57,7 +57,7 @@ public class IndiaCensusAdapterTest {
             IndianCensusAdapter indianCensusAdapter = new IndianCensusAdapter();
             indianCensusAdapter.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.NOT_SUFFICIENT_FILES, e.type);
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
         }
     }
 

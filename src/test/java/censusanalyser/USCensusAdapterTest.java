@@ -1,5 +1,6 @@
 package censusanalyser;
 
+import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,19 +13,19 @@ public class USCensusAdapterTest {
 
     @Test
     public void givenMessage_loadUS_CensusData_ShouldReturn_ExactCount() {
-        USCensusAdapter usCensusAdapter = new USCensusAdapter();
+        CensusAnalyser censusAnalyser = new CensusAnalyser(CensusAnalyser.Country.US);
         try {
-            Map<String, CensusDAO> censusDAOMap = usCensusAdapter.loadCensusData(US_CENSUS_DATA_CSV_FILE_PATH);
-            Assert.assertEquals(51, censusDAOMap.size());
+            int data = censusAnalyser.loadCensusData(US_CENSUS_DATA_CSV_FILE_PATH);
+            Assert.assertEquals(51, data);
         } catch (CensusAnalyserException e) {
         }
     }
 
     @Test
     public void givenMessage_loadUS_CensusData_WhenFilePathIncorrect_ShouldReturn_Exception() {
-        USCensusAdapter usCensusAdapter = new USCensusAdapter();
+        CensusAnalyser censusAnalyser = new CensusAnalyser(CensusAnalyser.Country.US);
         try {
-            Map<String, CensusDAO> censusDAOMap = usCensusAdapter.loadCensusData(INCORRECT_US_CENSUS_DATA_CSV_FILE_PATH);
+            censusAnalyser.loadCensusData(INCORRECT_US_CENSUS_DATA_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
         }
@@ -32,21 +33,21 @@ public class USCensusAdapterTest {
 
     @Test
     public void givenMessage_loadUS_CensusData_WhenFilePathNull_ShouldReturn_Exception() {
-        USCensusAdapter usCensusAdapter = new USCensusAdapter();
+        CensusAnalyser censusAnalyser = new CensusAnalyser(CensusAnalyser.Country.US);
         try {
-            Map<String, CensusDAO> censusDAOMap = usCensusAdapter.loadCensusData("");
+            censusAnalyser.loadCensusData("");
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.ONE_FILE_PATH, e.type);
         }
     }
 
     @Test
     public void givenMessage_loadUS_CensusData_WhenFileHasIncorrectDelimiter_ShouldReturn_Exception() {
-        USCensusAdapter usCensusAdapter = new USCensusAdapter();
+        CensusAnalyser censusAnalyser = new CensusAnalyser(CensusAnalyser.Country.US);
         try {
-            Map<String, CensusDAO> censusDAOMap = usCensusAdapter.loadCensusData(INCORRECT_DELIMITER_US_CENSUS_DATA_CSV_FILE_PATH);
+            censusAnalyser.loadCensusData(INCORRECT_DELIMITER_US_CENSUS_DATA_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.ONE_FILE_PATH, e.type);
         }
     }
 }

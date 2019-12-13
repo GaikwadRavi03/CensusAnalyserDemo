@@ -20,13 +20,13 @@ public class CensusAnalyser<E> {
         this.sortingMap.put(SortingField.population, Comparator.comparing(census -> census.population));
         this.sortingMap.put(SortingField.areaInSqKm, Comparator.comparing(census -> census.totalArea));
         this.sortingMap.put(SortingField.densityPerSqKm, Comparator.comparing(census -> census.populationDensity));
+        Comparator<CensusDAO> comparing = Comparator.comparing(census ->
+                census.population);
+        this.sortingMap.put(SortingField.population, comparing.thenComparing(census -> census.populationDensity));
     }
 
     Map<String, CensusDAO> censusStateMap = null;
     Map<SortingField, Comparator<CensusDAO>> sortingMap = null;
-
-//    public CensusAnalyser() {
-//    }
 
     public int loadCensusData(String... csvFilePath) throws CensusAnalyserException {
         CensusAdapter censusAdapter = CensusAnalyserFactory.loadCensusData(country);

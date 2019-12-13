@@ -18,6 +18,7 @@ public class IndiaCensusAdapterTest {
             Map<String, CensusDAO> censusDAOMap = indianCensusAdapter.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH, INDIA_STATE_CODE_CSV_FILE_PATH);
             Assert.assertEquals(29, censusDAOMap.size());
         } catch (CensusAnalyserException e) {
+            e.printStackTrace();
         }
     }
 
@@ -25,9 +26,9 @@ public class IndiaCensusAdapterTest {
     public void givenMessage_loadIndianCensusData_WhenSendOneFilePath_ShouldReturn_Exception() {
         IndianCensusAdapter indianCensusAdapter = new IndianCensusAdapter();
         try {
-            indianCensusAdapter.loadCensusData(INDIA_STATE_CODE_CSV_FILE_PATH);
+            indianCensusAdapter.loadCensusData(INDIA_STATE_CODE_CSV_FILE_PATH,INDIA_STATE_CODE_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.ONE_FILE_PATH, e.type);
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.NOT_SUFFICIENT_FILES, e.type);
         }
     }
 
@@ -55,9 +56,9 @@ public class IndiaCensusAdapterTest {
     public void givenIndianCensusCSVFile_WhenIncorrectDelimiter_ShouldReturnsException() {
         try {
             IndianCensusAdapter indianCensusAdapter = new IndianCensusAdapter();
-            indianCensusAdapter.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+            indianCensusAdapter.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH,INDIA_STATE_CODE_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.ONE_FILE_PATH, e.type);
         }
     }
 
@@ -65,9 +66,9 @@ public class IndiaCensusAdapterTest {
     public void givenIndianCensusCSVFile_WhenHeaderNotFound_ShouldReturnsException() {
         try {
             IndianCensusAdapter indianCensusAdapter = new IndianCensusAdapter();
-            indianCensusAdapter.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+            indianCensusAdapter.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH,INDIA_STATE_CODE_CSV_FILE_PATH);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.NOT_SUFFICIENT_FILES, e.type);
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.ONE_FILE_PATH, e.type);
         }
     }
 }

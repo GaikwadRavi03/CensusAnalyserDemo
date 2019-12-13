@@ -28,4 +28,14 @@ public class USCensusAdapterTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
         }
     }
+
+    @Test
+    public void givenMessage_loadUS_CensusData_WhenFilePathNull_ShouldReturn_Exception() {
+        USCensusAdapter usCensusAdapter = new USCensusAdapter();
+        try {
+            Map<String, CensusDAO> censusDAOMap = usCensusAdapter.loadCensusData("");
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
+        }
+    }
 }

@@ -4,18 +4,29 @@ import com.opencsv.bean.CsvBindByName;
 
 public class USCensusCSV {
 
-    @CsvBindByName(column = "State", required = true)
+    @CsvBindByName(column = "State")
     public String state;
 
-    @CsvBindByName(column = "State Id", required = true)
+    @CsvBindByName(column = "State Id")
     public String stateId;
 
-    @CsvBindByName(column = "Population", required = true)
+    @CsvBindByName(column = "Population")
     public int population;
 
-    @CsvBindByName(column = "Total area", required = true)
+    @CsvBindByName(column = "Total area")
     public double totalArea;
 
-    @CsvBindByName(column = "Population Density", required = true)
+    @CsvBindByName(column = "Population Density")
     public double populationDensity;
+
+    public USCensusCSV() {
+    }
+
+    public USCensusCSV(String state, String stateId, int population, double populationDensity, double totalArea) {
+        this.state = state;
+        this.stateId = stateId;
+        this.population = population;
+        this.totalArea = totalArea;
+        this.populationDensity = populationDensity;
+    }
 }

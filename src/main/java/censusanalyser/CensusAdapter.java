@@ -3,7 +3,6 @@ package censusanalyser;
 import opencsvbuilder.CSVBuilderException;
 import opencsvbuilder.CSVBuilderFactory;
 import opencsvbuilder.ICSVBuilder;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;

@@ -1,10 +1,7 @@
 package censusanalyser;
 
-import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Map;
 
 public class USCensusAdapterTest {
     private static final String US_CENSUS_DATA_CSV_FILE_PATH = "./src/test/resources/USCensusData.csv";

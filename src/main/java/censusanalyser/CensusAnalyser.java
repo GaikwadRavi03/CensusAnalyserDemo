@@ -25,8 +25,8 @@ public class CensusAnalyser<E> {
     Map<String, CensusDAO> censusStateMap = null;
     Map<SortingField, Comparator<CensusDAO>> sortingMap = null;
 
-    public CensusAnalyser() {
-    }
+//    public CensusAnalyser() {
+//    }
 
     public int loadCensusData(String... csvFilePath) throws CensusAnalyserException {
         CensusAdapter censusAdapter = CensusAnalyserFactory.loadCensusData(country);

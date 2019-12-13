@@ -255,7 +255,7 @@ public class CensusAnalyserTest {
             censusAnalyser.loadCensusData(US_CENSUS_DATA_CSV_FILE_PATH);
             String stateWiseSortedCensusData = censusAnalyser.getStateWiseSortedCensusData(SortingField.state);
             CensusDAO[] censusCSV = new Gson().fromJson(stateWiseSortedCensusData, CensusDAO[].class);
-            Assert.assertEquals("Wyoming", censusCSV[50].state);
+            Assert.assertEquals("Wyoming", censusCSV[censusCSV.length-1].state);
         } catch (CensusAnalyserException e) {
         }
     }
@@ -267,7 +267,7 @@ public class CensusAnalyserTest {
             censusAnalyser.loadCensusData(US_CENSUS_DATA_CSV_FILE_PATH);
             String stateWiseSortedCensusData = censusAnalyser.getStateWiseSortedCensusData(SortingField.population);
             CensusDAO[] censusCSV = new Gson().fromJson(stateWiseSortedCensusData, CensusDAO[].class);
-            Assert.assertEquals("California", censusCSV[50].state);
+            Assert.assertEquals("California", censusCSV[censusCSV.length-1].state);
         } catch (CensusAnalyserException e) {
         }
     }
@@ -291,7 +291,7 @@ public class CensusAnalyserTest {
             censusAnalyser.loadCensusData(US_CENSUS_DATA_CSV_FILE_PATH);
             String stateWiseSortedCensusData = censusAnalyser.getStateWiseSortedCensusData(SortingField.areaInSqKm);
             CensusDAO[] censusCSV = new Gson().fromJson(stateWiseSortedCensusData, CensusDAO[].class);
-            Assert.assertEquals("Alaska", censusCSV[50].state);
+            Assert.assertEquals("Alaska", censusCSV[censusCSV.length-1].state);
         } catch (CensusAnalyserException e) {
         }
     }
@@ -327,7 +327,7 @@ public class CensusAnalyserTest {
             censusAnalyser.loadCensusData(US_CENSUS_DATA_CSV_FILE_PATH);
             String stateWiseSortedCensusData = censusAnalyser.getStateWiseSortedCensusData(SortingField.densityPerSqKm);
             CensusDAO[] censusCSV = new Gson().fromJson(stateWiseSortedCensusData, CensusDAO[].class);
-            Assert.assertEquals("District of Columbia", censusCSV[50].state);
+            Assert.assertEquals("District of Columbia", censusCSV[censusCSV.length-1].state);
         } catch (CensusAnalyserException e) {
         }
     }

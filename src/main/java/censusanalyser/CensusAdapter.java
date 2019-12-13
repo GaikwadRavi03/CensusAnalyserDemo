@@ -3,6 +3,7 @@ package censusanalyser;
 import opencsvbuilder.CSVBuilderException;
 import opencsvbuilder.CSVBuilderFactory;
 import opencsvbuilder.ICSVBuilder;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -34,10 +35,8 @@ public abstract class CensusAdapter {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         } catch (CSVBuilderException e) {
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.ONE_FILE_PATH);
-        } catch (RuntimeException e) {
+        }
+        catch (RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.ONE_FILE_PATH);
         }
